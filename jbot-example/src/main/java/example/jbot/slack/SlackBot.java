@@ -161,9 +161,4 @@ public class SlackBot extends Bot {
         }
         stopConversation(event);    // stop conversation
     }
-
-    @Controller(events = EventType.PING)
-    public void sendToChannel(WebSocketSession session, Event event){
-        reply(session, event, "Brawo udalo sie");
-    }
 }
