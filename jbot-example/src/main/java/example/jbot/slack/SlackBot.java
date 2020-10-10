@@ -55,7 +55,7 @@ public class SlackBot extends Bot {
      */
     @Controller(events = {EventType.DIRECT_MENTION, EventType.DIRECT_MESSAGE})
     public void onReceiveDM(WebSocketSession session, Event event) {
-        reply(session, event, "Hi, I am " + slackService.getCurrentUser().getName());
+        reply(session, event, "Twoja stara " + slackService.getCurrentUser().getName());
     }
 
     /**
@@ -139,7 +139,7 @@ public class SlackBot extends Bot {
     public void askTimeForMeeting(WebSocketSession session, Event event) {
         if (event.getText().contains("yes")) {
             reply(session, event, "Okay. Would you like me to set a reminder for you?");
-            nextConversation(event);    // jump to next question in conversation  
+            nextConversation(event);    // jump to next question in conversation
         } else {
             reply(session, event, "No problem. You can always schedule one with 'setup meeting' command.");
             stopConversation(event);    // stop conversation only if user says no
@@ -160,5 +160,10 @@ public class SlackBot extends Bot {
             reply(session, event, "Okay, don't forget to attend the meeting tomorrow :)");
         }
         stopConversation(event);    // stop conversation
+    }
+
+    @Controller(events = EventType.PING)
+    public void sendToChannel(WebSocketSession session, Event event){
+        reply(session, event, "Brawo udalo sie");
     }
 }
